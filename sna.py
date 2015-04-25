@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
-
-# <codecell>
 
 import community
 import networkx as nx
@@ -13,7 +10,6 @@ import operator
 import multiprocessing
 import itertools
 
-# <codecell>
 
 BASE_PATH = "/home/nmtsylla/python_labs/projet_sna/graph/"
 graph = nx.read_adjlist('/home/nmtsylla/python_labs/projet_sna/out.cfinder-google')
@@ -22,7 +18,6 @@ cpte = 0
 centralities = {}
 betweennesses = {}
 
-# <codecell>
 
 def findPartitionL(G):
     partition = community.best_partition(G)
@@ -34,7 +29,7 @@ def findPartitionL(G):
         count = count + 1
         list_nodes = [nodes for nodes in partition.keys()
                                 if partition[nodes] == com]
-       
+
         if len (list_nodes) > 250 :
             n = nx.subgraph(G,list_nodes)
             filename= BASE_PATH+'Partition'+ str(count) +'.txt'
@@ -42,7 +37,6 @@ def findPartitionL(G):
             fileList.append(filename)
     return fileList
 
-# <codecell>
 
 def findPartitionK(G):
     partition = list (nx.k_clique_communities(G, 3))
@@ -54,7 +48,6 @@ cpte_centrality = 0
 cpte_betweeness = 0
 cpte_centrality = 0
 
-# <codecell>
 
 def centrality_degree(g, n):
     print multiprocessing.current_process().name
@@ -69,7 +62,6 @@ def centrality_degree(g, n):
     centrest = "Le noeud le plus central de cette partition est: " + str(tuple(reversed(degcent_sorted[0]))[1])
     return dc, centrest
 
-# <codecell>
 
 def betweenness(g, n):
     print multiprocessing.current_process().name
@@ -106,13 +98,13 @@ def all_centrality(liste):
         cpte += 1
         liste, noeud_central = centrality_degree(g, cpte)
         print noeud_central
-        
+
 def all_distrib_degree(liste):
     cpte = 0
     for g in liste:
         cpte += 1
         degree_distrib(g, cpte)
-        
+
 def all_betweenness(liste):
     cpte = 0
     for g in liste:
